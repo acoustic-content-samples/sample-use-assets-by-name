@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WCH Sample - Referencing Assets By Name</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets-by-name.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body class="container">
+    <div>
+        <h2 class="text-center">IBM Watson Content Hub</h2>
+        <h3 class="text-center">Sample - Referencing Assets By Name</h3>
+
+        <table class="table table-striped text-center">
+            <tbody>
+                <tr>
+                    <td>
+                        <div>Image src - life3.jpg</div>
+                        <img data-wch-asset-src="life3.jpg" height="200"></img>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>Link href - life4.jpg</div>
+                        <a data-wch-asset-href="life4.jpg" height="200">life4.jpg</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>Background image - mountains.jpg</div>
+                        <div class="backgroundStyle" class="cognitive-digital-hero" data-wch-asset-background-image="mountains.jpg">
+                            <h1 class="text-center" style="max-width: 400px;color: white;">
+                                This background image is from WCH
+                            </h1>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
