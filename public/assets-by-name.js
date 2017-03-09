@@ -13,40 +13,23 @@
 // Base URL for APIs - replace {Host} and {Tenant ID} using the values available 
 // from the "i" information icon at the top left of the WCH screen 
 const baseTenantUrl = "https://{Host}/api/{Tenant ID}";
+const serverBaseUrl = "https://{Host}";
 
-// Content Hub blueid username and password - replace these or add code to get these from inputs
-const username = "[username]";
-const password = "[password]";
-
-const basicAuthUrl = baseTenantUrl + "/login/v1/basicauth";
-const searchService = baseTenantUrl + "/authoring/v1/search";
+const searchService = baseTenantUrl + "/delivery/v1/search";
 
 // Generic search function
 function search(searchParams, cb) {
     // console.log('searchParams is: ', searchParams);
-    var requestOptions = {
+    var searchURL = searchService + "?" + searchParams;
+    var reqOptions = {
         xhrFields: {
             withCredentials: true
         },
-        url: basicAuthUrl,
-        headers: {
-            "Authorization": "Basic " + btoa(username + ":" + password)
-        }
+        dataType: "json",
+        url: searchURL,
     };
-    $.ajax(requestOptions).done(function(data, textStatus, request) {
-        var searchURL = searchService + "?" + searchParams;
-        var reqOptions = {
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json",
-            url: searchURL,
-        };
-        $.ajax(reqOptions).done(function(json) {
-            cb(json);
-        });
-    }).fail(function(request, textStatus, err) {
-        alert("Content Hub Login returned an error: " + err);
+    $.ajax(reqOptions).done(function(json) {
+        cb(json);
     });
 }
 
@@ -56,16 +39,16 @@ function processReferences(documents) {
 
     // create map - asset name to document.links.media.href
     var assetMap = documents.reduce(function(total, current) {
-        var doc = current['document'];
-        if (doc.links && doc.links.media) {
+        var doc = current;
+        if (doc.url) {
             // Generate direct Akamai URL for asset:
-            var akamaiUrl = baseTenantUrl.replace('/api','') + doc.path
-            if (total[current.name] !== undefined) {
-                console.log('Skipping duplicate asset with name', current.name);
+            var akamaiUrl = serverBaseUrl + doc.url;
+            if (total[doc.name] !== undefined) {
+                console.log('Skipping duplicate asset with name', doc.name);
             }
             else 
             {
-             total[current.name] = akamaiUrl;
+             total[doc.name] = akamaiUrl;
                   
             }
         }
@@ -121,7 +104,7 @@ function processReferences(documents) {
 
 function updatePageAssetReferences() {
     // search for assets, returning complete document element as JSON
-    var searchParams = "q=*:*&fl=name,document:[json]&fq=classification:asset&sort=lastModified%20desc&rows=500";
+    var searchParams = "q=*:*&fl=*&fq=classification:asset&sort=lastModified%20desc&rows=500";
     var tags = [];
     // See if there are any data-wch-search-tags attributes that set tags to scope the search, e.g., to a page
     $("[data-wch-search-tags]").each(function(index, item) {
@@ -138,6 +121,7 @@ function updatePageAssetReferences() {
     // @todo - use local storage to cache the search results
     search(searchParams, function(results) {
         if (results.documents) {
+
             processReferences(results.documents);
         }
     });

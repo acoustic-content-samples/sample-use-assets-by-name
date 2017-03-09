@@ -40,11 +40,15 @@ The code uses the Content Hub search API to find assets and then generates a map
 
 Clone or download the repository folder into any folder on your workstation. (Use [Clone or Download](https://help.github.com/articles/cloning-a-repository/) button on the Github repository home page).
 
-#### 2. Update the user credentials and baseTenantUrl
+#### 2. Update the baseTenantUrl and serverBaseUrl
 
-This sample includes user name, password, and baseTenantUrl values set in the assets-by-name.js file in the public directory. Update those three values for your tenant. To obtain the baseTenantUrl, in the IBM Watson Content Hub user interface, click the "i" information icon at the top left of the screen next to where it says IBM Watson Content Hub. The pop-up window shows your host and tenant ID. Use this information to update the value of baseTenantUrl. For example it might look something like this:
+This sample includes baseTenantUrl and serverBaseUrl values set in the assets-by-name.js file in the public directory. Update those values for your tenant. To obtain the baseTenantUrl, in the IBM Watson Content Hub user interface, click the "i" information icon at the top left of the screen next to where it says IBM Watson Content Hub. The pop-up window shows your host and tenant ID. Use this information to update the value of baseTenantUrl. For example it might look something like this:
 
 const baseTenantUrl = "https://my12.digitalexperience.ibm.com/api/12345678-9abc-def0-1234-56789abcdef0";
+
+The serverBaseUrl will include just the first part of that, similar to this:
+
+const serverBaseUrl = "https://my12.digitalexperience.ibm.com";
 
 #### 3. Edit the asset names in index.html if necessary
 
