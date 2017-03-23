@@ -10,8 +10,9 @@
 
 "use strict";
 
-// Base URL for APIs - replace {Host} and {Tenant ID} using the values available 
-// from the "i" information icon at the top left of the WCH screen 
+// The API URL, along with the host and content hub id for your tenant, may be
+// found in the "Hub Information" dialog off the "User menu" in the authoring UI
+// Update the following URLs with the values from that Hub Information dialog.
 const baseTenantUrl = "https://{Host}/api/{Tenant ID}";
 const serverBaseUrl = "https://{Host}";
 
@@ -46,10 +47,10 @@ function processReferences(documents) {
             if (total[doc.name] !== undefined) {
                 console.log('Skipping duplicate asset with name', doc.name);
             }
-            else 
+            else
             {
              total[doc.name] = akamaiUrl;
-                  
+
             }
         }
         return total;
