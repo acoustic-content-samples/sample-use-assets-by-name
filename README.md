@@ -1,8 +1,8 @@
 # sample-use-assets-by-name
-Sample showing how IBM Watson Content Hub (WCH) assets can be used in a page or application by name
+Sample showing how Acoustic Content (formerly Watson Content Hub or WCH) assets can be used in a page or application by name
 
 ### Overview
-Any assets such as image files that are uploaded into WCH are automatically published and available for retrieval via the Akamai CDN provided with Content Hub. The assets are retrieved with a URL that includes the asset "path" value.
+Any assets such as image files that are uploaded into WCH are automatically published and available for retrieval via the Akamai CDN provided with Acoustic Content. The assets are retrieved with a URL that includes the asset "path" value.
 
 This sample includes helper code that lets you reference Content Hub assets using the asset name instead of the asset path. The asset name can be edited in the Content Hub user interface, while the asset path is assigned automatically and is not editable in Content Hub. The sample uses client JS code to dynamically update the page HTML with the Akamai CDN URL for each asset reference. This allows you to upload a new version of an asset file in Content Hub and have your page automatically reference the new asset.
 
